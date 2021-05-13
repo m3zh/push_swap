@@ -6,7 +6,7 @@
 #    By: mlazzare <mlazzare@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/12 22:25:32 by mlazzare          #+#    #+#              #
-#    Updated: 2021/05/13 20:02:46 by mlazzare         ###   ########.fr        #
+#    Updated: 2021/05/13 20:05:39 by mlazzare         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,3 +37,4 @@ clean:
 
 fclean: clean
 	@rm $(NAME)
+	@cd $(LIBFT) && make fclean
