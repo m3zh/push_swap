@@ -6,7 +6,7 @@
 /*   By: mlazzare <mlazzare@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/19 15:25:45 by mlazzare          #+#    #+#             */
-/*   Updated: 2021/07/21 15:06:31 by mlazzare         ###   ########.fr       */
+/*   Updated: 2021/07/23 16:56:00 by mlazzare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void	ft_cmd(char *line, t_stack **a, t_stack **b)
 
 static void	ft_cmd2(char *line, t_stack **a, t_stack **b)
 {
-	if (!ft_strcmp(line, "pa"))
+	if (!ft_strcmp(line, "pa") && *b)
 	{
 		ft_push(a, (*b)->num, 0);
 		ft_pop(b, (*b)->num);
