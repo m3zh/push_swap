@@ -1,34 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
+/*   checker_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mlazzare <mlazzare@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/22 22:42:39 by mlazzare          #+#    #+#             */
-/*   Updated: 2020/11/22 22:51:27 by mlazzare         ###   ########.fr       */
+/*   Created: 2021/07/19 15:27:00 by mlazzare          #+#    #+#             */
+/*   Updated: 2021/07/20 15:33:43 by mlazzare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../inc/pushswap.h"
 
-void	ft_putnbr_fd(int n, int fd)
+void	ft_rrr(t_stack **a, t_stack **b, char c)
 {
-	long int	nb;
-	char		c;
+	ft_shiftup(a, c);
+	ft_shiftup(b, c);
+}
 
-	nb = n;
-	if (nb < 0)
+void	ft_rr(t_stack **a, t_stack **b, char c)
+{
+	ft_shiftdown(a, c);
+	ft_shiftdown(b, c);
+}
+
+int	ft_strcmp(const char *s1, const char *s2)
+{
+	size_t	i;
+
+	i = 0;
+	while (s1[i] || s2[i])
 	{
-		nb *= -1;
-		write(fd, "-", 1);
+		if (s1[i] != s2[i])
+			return (((unsigned char *)s1)[i]
+					- ((unsigned char *)s2)[i]);
+		i++;
 	}
-	if (nb < 10)
-		c = nb % 10 + '0';
-	else if (nb >= 10)
-	{
-		c = nb % 10 + '0';
-		ft_putnbr_fd(nb / 10, fd);
-	}
-	write(fd, &c, 1);
+	return (0);
 }

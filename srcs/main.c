@@ -12,26 +12,26 @@
 
 #include "../inc/pushswap.h"
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
-    int *a;
-    int *b;
-    int l;
+	t_stack	*a;
+	t_stack	*b;
+	int		l;
 
-    if (argc == 1 || argc > 2)
-        printf("Error\n");
-    else
-    {
-        l = input_length(argv[1]);
-        a = malloc(sizeof(int) * l);
-        if (!a)
-            return (0);
-        b = malloc(sizeof(int) * l);
-        if (!b)
-            return (0);
-        pushswap(argv[1], a, b);        
-    }
-    free (a);
-    free (b);
-    return (0);
+	if (argc != 1)
+	{
+		l = argc - 1;
+		a = NULL;
+		if (!fill_stack(l, argc, argv, &a))
+		{
+			write(1, "Error\n", 6);
+			free_stack(&a);
+			return (0);
+		}
+		b = NULL;
+		pushswap(&a, &b, l);
+		free_stack(&a);
+		free_stack(&b);
+	}
+	return (0);
 }

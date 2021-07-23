@@ -12,29 +12,54 @@
 
 NAME = push_swap
 
-INC = inc/pushswap.h
+CHK = checker
 
-CC = gcc
+INC = -I./inc
+
+CC = gcc -g3
 CFLAGS = -Wall -Wextra -Werror
 
 SRC = \
 	srcs/main.c \
 	srcs/pushswap.c \
-	srcs/input.c
+	srcs/pushswap_utils.c \
+	srcs/stack.c \
+	srcs/stack_utils.c \
+	srcs/small_sort.c \
+	srcs/small_sortutils.c \
+	srcs/sort_utils.c \
+	srcs/ft_atoi.c
+
+SRCB = \
+	srcs/checker.c \
+	srcs/checker_utils.c \
+	srcs/checker_gnl.c \
+	srcs/pushswap_utils.c \
+	srcs/sort_utils.c \
+	srcs/small_sortutils.c \
+	srcs/stack.c \
+	srcs/stack_utils.c \
+	srcs/ft_atoi.c
 
 OBJS = 	$(SRC:.c=.o)
+OBJB = 	$(SRCB:.c=.o)
 
-LIBFT = libft/
+$(NAME): $(OBJS)
+	$(CC) $(OBJS) $(CFLAGS) $(INC) -o $(NAME) 
 
-$(NAME): $(OBJS) makelibft
-	$(CC) $(CFLAGS) $(INC) $(OBJS) libft/*.a -o $(NAME) 
+all: $(NAME)
 
-makelibft:
-	$(MAKE) $(LIBFT)
+$(CHK): $(OBJB)
+	$(CC) $(OBJB) $(CFLAGS) $(INC) -o $(CHK)
+
+bonus: $(CHK)
 
 clean:
-	@rm $(OBJS)
+	@rm -f $(OBJS) $(OBJB)
 
 fclean: clean
-	@rm $(NAME)
-	@cd $(LIBFT) && make fclean
+	@rm -f $(NAME) $(CHK)
+
+re: fclean all
+
+.PHONY: all clean fclean re bonus

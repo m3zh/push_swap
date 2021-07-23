@@ -12,37 +12,53 @@
 
 #include "../inc/pushswap.h"
 
-int check_input(char *input, int *a)
+void	free_stack(t_stack **a)
 {
-    int i;
-    int j;
+	t_stack	*tmp;
 
-    i = -1;
-    j = 0;
-    while(input[j])
-    {
-        while (input[j] == ' ')
-            j++;
-        a[++i] = ft_atoi(&input[j]);
-    }
-    return (0);
+	while (a && *a && (*a)->prev)
+	{
+		*a = (*a)->prev;
+	}
+	while (a && *a)
+	{
+		tmp = (*a)->next;
+		free(*a);
+		*a = tmp;
+	}
 }
 
-int input_length(char *input)
+void	ft_emptystack(t_stack **b, t_stack **a)
 {
-    int i;
+	while (*b)
+	{
+		ft_push(a, (*b)->num, 'a');
+		ft_pop(b, (*b)->num);
+	}
+}
 
-    i = 1;
-    if (!ft_strcmp(input, ""))
-    {
-        printf("Error\n");
-        exit(0);
-    }
-    while(*input)
-    {
-        while (*input == ' ')
-            input++;
-        i++;
-    }
-    return (0);
+int	get_stacksize(t_stack *a)
+{
+	int	i;
+
+	i = 0;
+	while (a)
+	{
+		i++;
+		a = a->next;
+	}
+	return (i);
+}
+
+t_stack	*copy_stack(t_stack *s)
+{
+	t_stack	*c;
+
+	c = NULL;
+	while (s)
+	{
+		new_stack(&c, s->num);
+		s = s->next;
+	}
+	return (c);
 }
